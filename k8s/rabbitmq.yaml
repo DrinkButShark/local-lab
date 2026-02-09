@@ -18,9 +18,7 @@ spec:
           password: password
           erlangCookie: secretcookie
         metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: rabbitmq
