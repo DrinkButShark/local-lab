@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: k3d-local-registry:5000/local-lab-frontend:latest
+          image: local-registry:5000/local-lab-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
