@@ -20,6 +20,14 @@ def index():
         
     return render_template("index.html", message=message, backend_url=BACKEND_URL)
 
+@app.get("/api/data")
+def api_proxy():
+    try:
+        response = requests.get(f"{BACKEND_URL}/")
+        return jsonify(response.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.get("/health")
 def health():
     return {"status": "healthy"}
