@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: rabbitmq
-    targetRevision: 14.4.1
+    targetRevision: 16.0.14
     helm:
       values: |
         auth:
@@ -18,7 +18,9 @@ spec:
           password: password
           erlangCookie: secretcookie
         metrics:
-          enabled: false
+          enabled: true
+          serviceMonitor:
+            enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: rabbitmq
