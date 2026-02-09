@@ -1,0 +1,25 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: local-lab
+servers: 1
+agents: 2
+image: rancher/k3s:latest
+registries:
+  create:
+    name: local-registry
+    host: "0.0.0.0"
+    hostPort: "5000"
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d:
+    wait: true
+    timeout: "60s"
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
