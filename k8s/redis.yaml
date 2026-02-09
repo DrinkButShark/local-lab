@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rabbitmq
+  name: redis
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,21 +9,23 @@ spec:
   project: default
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    chart: rabbitmq
-    targetRevision: 16.0.14
+    chart: redis
+    targetRevision: 20.0.0
     helm:
       values: |
+        architecture: standalone
         auth:
-          username: user
-          password: password
-          erlangCookie: secretcookie
+          enabled: false
+        master:
+          persistence:
+            enabled: false
         metrics:
           enabled: true
           serviceMonitor:
-            enabled: true
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: rabbitmq
+    namespace: redis
   syncPolicy:
     automated:
       prune: true
